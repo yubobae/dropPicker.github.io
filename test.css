@@ -1,8 +1,0 @@
-body { font-family:'Nanum Gothic', "맑은고딕", MalgunGothic, "돋움", Dotum, sans-serif; height:100vh; display:flex; flex-direction:column; background:#242424; }
-.content { display:flex; height:inherit; width:inherit; color:#fff; }
-.preview--area {position:relative;margin:20px;width: 900px;height: 900px;flex:0 0 auto;overflow:hidden;box-sizing:border-box;border:1px solid #666;cursor:crosshair;}
-.preview--area .color { position:absolute; width:40px; height:40px; border-radius:50%; border:2px solid #eee;}
-.picker--area .picker--list { display:flex; margin:5px; flex-wrap: wrap;}
-.picker--area .picker--list .picker--item { margin:5px; }
-.picker--area .picker--colorchip { display:block; width:100px; height:100px; cursor:pointer;}
-.picker--area .picker--name { font-size:11px; }
