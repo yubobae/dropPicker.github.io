@@ -4,7 +4,7 @@ const imgArea = document.querySelector('.preview');
 const storage = localStorage;
 const saveImg = storage.getItem('img');
 const ctx = imgArea.getContext('2d');
-const color = document.querySelector('.color');
+const pointer = document.querySelector('.preview--pointer');
 
 function uploadPreview(data) {
     const img = new Image;
@@ -29,14 +29,22 @@ function uploadHandler() {
     reader.readAsDataURL(file);
 }
 
+function pointerVeiw(option) {
+    pointer.style.cssText = `top:${pointY}px; left:${pointX}px; background:rgb(${RGB});`;
+}
+
 function pickerColor(point) {
     let pointX = point.layerX;
     let pointY = point.layerY;
+
     const pixel = ctx.getImageData(pointX,pointY,1,1);
     const data = pixel.data;
-    const rgba = `${data[0]},${data[1]},${data[2]}`;
+    const R = data[0];
+    const G = data[1];
+    const B = data[2];
+    const RGB = `${R},${G},${B}`;
     
-    color.style.cssText = `top:${pointY}px; left:${pointX}px; background:rgb(${rgba});`;
+    pointerVeiw()
 
     if(point.type == "click") {
         const pickList = document.createElement('li');
@@ -48,8 +56,8 @@ function pickerColor(point) {
         pickEvent.classList.add('picker--wrap');
         pickColor.classList.add('picker--colorchip');
         pickInfo.classList.add('picker--name');
-        pickInfo.innerText = `RGB:${rgba}`;
-        pickColor.style.background =  `rgb(${rgba})`;
+        pickInfo.innerText = `RGB:${RGB}`;
+        pickColor.style.background =  `rgb(${RGB})`;
 
         pickEvent.append(pickColor,pickInfo);
         pickList.appendChild(pickEvent)
