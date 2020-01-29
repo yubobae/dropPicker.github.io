@@ -6,7 +6,7 @@ const saveImg = storage.getItem('img');
 const ctx = imgArea.getContext('2d');
 const pointer = document.querySelector('.preview--pointer');
 
-function uploadPreview(data) {
+function showPreview(data) {
     const img = new Image;
     let canvasHeight = imgArea.height;
     let canvasWidth = imgArea.width;
@@ -23,14 +23,10 @@ function uploadHandler() {
     const reader = new FileReader();
 
     reader.onload = () => {
-        uploadPreview(reader.result);
+        showPreview(reader.result);
         storage.setItem('img',JSON.stringify(reader.result));
     };
     reader.readAsDataURL(file);
-}
-
-function pointerVeiw(option) {
-    pointer.style.cssText = `top:${pointY}px; left:${pointX}px; background:rgb(${RGB});`;
 }
 
 function pickerColor(point) {
@@ -44,7 +40,7 @@ function pickerColor(point) {
     const B = data[2];
     const RGB = `${R},${G},${B}`;
     
-    pointerVeiw()
+    pointer.style.cssText = `top:${pointY}px; left:${pointX}px; background:rgb(${RGB});`;
 
     if(point.type == "click") {
         const pickList = document.createElement('li');
@@ -89,7 +85,7 @@ function clickHendler(event) {
 function init() {
     if(saveImg !== null ) {
         let currentImg = JSON.parse(saveImg);
-        uploadPreview(currentImg);
+        showPreview(currentImg);
     }
      uploadFile.addEventListener('change', uploadHandler);
      imgArea.addEventListener('mousemove', pickerColor);
